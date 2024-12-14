@@ -9,27 +9,34 @@ import com.javacode.project.model.OperationType;
 import com.javacode.project.model.Wallet;
 import com.javacode.project.repository.WalletRepository;
 import com.javacode.project.util.WalletMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 
 @Service
-@RequiredArgsConstructor
+@Transactional
 public class WalletServiceImpl implements WalletService {
 
 
     private final WalletMapper walletMapper;
     private final WalletRepository walletRepository;
 
-    @Override
-    public WalletDto getWallet(UUID id) {
-        return walletMapper.walletToDto(walletRepository.getWalletById(id).orElse(null));
+    public WalletServiceImpl(WalletMapper walletMapper, WalletRepository walletRepository) {
+        this.walletMapper = walletMapper;
+        this.walletRepository = walletRepository;
     }
 
     @Override
+    public WalletDto getWallet(UUID id) {
+        OperationDto operationDto = new OperationDto();
+        return walletMapper.walletToDto(walletRepository.getWalletById(id).orElseThrow(() -> new WalletNotFoundException(operationDto.getWalletId())));
+    }
+
+    @Override
+    @Transactional
     public void updateWallet(OperationDto operationDto) {
         Wallet wallet = walletRepository.getWalletdByIdWithLock(operationDto.getWalletId())
                 .orElseThrow(() -> new WalletNotFoundException(operationDto.getWalletId()));
