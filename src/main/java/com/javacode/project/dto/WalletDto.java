@@ -1,10 +1,6 @@
 package com.javacode.project.dto;
 
-import com.javacode.project.model.OperationType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.javacode.project.model.Type;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -20,16 +16,16 @@ public class WalletDto {
 
     private BigDecimal balance;
 
-    private OperationType operationType;
+    private Type type;
 
 
     public WalletDto() {
     }
 
-    public WalletDto(UUID id, BigDecimal balance, OperationType operationType) {
+    public WalletDto(UUID id, BigDecimal balance, Type type) {
         this.id = id;
         this.balance = balance;
-        this.operationType = operationType;
+        this.type = type;
     }
 
     public UUID getId() {
@@ -48,11 +44,11 @@ public class WalletDto {
         this.balance = balance;
     }
 
-    public OperationType getOperationType() {
-        return operationType;
+    public Type getType() {
+        return type;
     }
 
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
+    public void setType(Type type) {
+        this.type = type;
     }
 }

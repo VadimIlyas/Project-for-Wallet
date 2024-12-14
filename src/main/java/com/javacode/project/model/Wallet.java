@@ -8,11 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -34,9 +29,9 @@ public class Wallet {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @Column(name = "operation_type")
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private OperationType operationType;
+    private Type type;
 
     public Wallet() {}
 
@@ -56,12 +51,12 @@ public class Wallet {
         this.balance = balance;
     }
 
-    public OperationType getOperationType() {
-        return operationType;
+    public Type getType() {
+        return type;
     }
 
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     @Override
@@ -69,11 +64,11 @@ public class Wallet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wallet wallet = (Wallet) o;
-        return Objects.equals(id, wallet.id) && Objects.equals(balance, wallet.balance) && operationType == wallet.operationType;
+        return Objects.equals(id, wallet.id) && Objects.equals(balance, wallet.balance) && type == wallet.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, balance, operationType);
+        return Objects.hash(id, balance, type);
     }
 }

@@ -1,5 +1,11 @@
-#FROM openjdk:17
-#COPY /wait-for-it.sh .
-#ADD target/project.jar project.jar
-#ENTRYPOINT ["./wait-for-it.sh"]
-#CMD ["java", "-jar", "/project.jar"]
+FROM maven:3.8.6-eclipse-temurin-17 as builder
+WORKDIR /opt/app
+COPY /mvnw pom.xml ./
+COPY .src ./src
+RUN mvn clean install -DskipTests
+
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /opt/app
+EXPOSE 8080
+COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+EXPOSE["java", "-jar", "/opt/app/*.jar" ]

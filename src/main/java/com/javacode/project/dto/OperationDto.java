@@ -1,6 +1,6 @@
 package com.javacode.project.dto;
 
-import com.javacode.project.model.OperationType;
+import com.javacode.project.model.Type;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -16,15 +16,15 @@ public class OperationDto {
 
     private BigDecimal amount;
 
-    private OperationType operationType;
+    private Type type;
 
     public OperationDto() {
     }
 
-    public OperationDto(UUID walletId, BigDecimal amount, OperationType operationType) {
+    public OperationDto(UUID walletId, BigDecimal amount, Type operationType) {
         this.walletId = walletId;
         this.amount = amount;
-        this.operationType = operationType;
+        this.type = operationType;
     }
 
     public UUID getWalletId() {
@@ -43,11 +43,11 @@ public class OperationDto {
         this.amount = amount;
     }
 
-    public OperationType getOperationType() {
-        return operationType;
+    public Type getType() {
+        return type;
     }
 
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
+    public void setType(Type type) {
+        this.type = type;
     }
 }

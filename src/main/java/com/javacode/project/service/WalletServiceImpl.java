@@ -5,7 +5,7 @@ import com.javacode.project.dto.WalletDto;
 import com.javacode.project.exception.InsufficientBalanceException;
 import com.javacode.project.exception.InvalidOperationTypeException;
 import com.javacode.project.exception.WalletNotFoundException;
-import com.javacode.project.model.OperationType;
+import com.javacode.project.model.Type;
 import com.javacode.project.model.Wallet;
 import com.javacode.project.repository.WalletRepository;
 import com.javacode.project.util.WalletMapper;
@@ -41,7 +41,7 @@ public class WalletServiceImpl implements WalletService {
         Wallet wallet = walletRepository.getWalletdByIdWithLock(operationDto.getWalletId())
                 .orElseThrow(() -> new WalletNotFoundException(operationDto.getWalletId()));
         BigDecimal currentBalance = wallet.getBalance();
-        OperationType type = operationDto.getOperationType();
+        Type type = operationDto.getType();
         BigDecimal newBalance;
         switch (type) {
             case DEPOSIT -> newBalance = currentBalance.add(operationDto.getAmount());

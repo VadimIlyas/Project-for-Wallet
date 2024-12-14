@@ -9,7 +9,7 @@ public class InvalidOperationTypeException extends RuntimeException {
     }
 
     public InvalidOperationTypeException(OperationDto operationDto) {
-        super("Invalid type of operation: " + operationDto.getOperationType());
+        super("Invalid type of operation: " + operationDto.getType());
     }
 
 }

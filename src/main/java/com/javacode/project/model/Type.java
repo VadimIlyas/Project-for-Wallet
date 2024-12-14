@@ -1,6 +1,6 @@
 package com.javacode.project.model;
 
-public enum OperationType {
+public enum Type {
 
     DEPOSIT,
     WITHDRAW
